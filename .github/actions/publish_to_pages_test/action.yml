@@ -7,16 +7,43 @@ inputs:
   CLOUDFLARE_API_TOKEN:
     description: 'Cloudflare token'
     required: true
+  GITHUB_TOKEN:
+    description: 'GitHub token for authentication'
+    required: true
 runs:
   using: composite
   steps:
-  - name: Publish to cloudflare pages (test)
-    env:
-      CLOUDFLARE_ACCOUNT_ID: ${{ inputs.CLOUDFLARE_ACCOUNT_ID }}
-      CLOUDFLARE_API_TOKEN: ${{ inputs.CLOUDFLARE_API_TOKEN }}
-    run: |
-      npm i wrangler@3.1.0
-      cd packages/core
-      npx wrangler pages deploy dist/ --project-name=deriv-app-pages --branch=test
-      echo "New website - http://test.cf-pages-deriv-app.deriv.com"
-    shell: bash
+    - name: Publish to cloudflare pages (test)
+      id: deploy
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ inputs.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages deploy dist/ --project-name=wallets-app --branch=test
+        workingDirectory: packages/core
+
+    # Assuming this step successfully captures the deployment URL as shown in your example
+    - name: print deployment-url
+      env:
+        DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+      run: echo "Deployment URL: $DEPLOYMENT_URL"
+
+    # New step to post comment on the PR with the deployment URL
+    - name: Comment PR with deployment URL
+      uses: actions/github-script@v5
+      if: github.event_name == 'pull_request'
+      with:
+        github-token: ${{ inputs.GITHUB_TOKEN }}
+        script: |
+          const deploymentUrl = process.env.DEPLOYMENT_URL;
+          const prNumber = context.payload.pull_request.number;
+          const message = `🚀 Deploy preview ready! [View deployment](${deploymentUrl})`;
+
+          github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+            body: message
+          });
+      env:
+        DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}

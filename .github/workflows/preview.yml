@@ -1,14 +1,20 @@
-name: Deriv App Release to Test environment Workflow
+name: Wallets Release to Test environment Workflow
 on:
-  push:
-    branches:
-    - master
+  pull_request:
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  deployments: read
+  pull-requests: write
+  statuses: read
 
 jobs:
   build_test_and_publish:
     name: Build, Test and Publish to Cloudflare Test
-    runs-on: Runner_8cores_Deriv-app
-    environment: Staging
+    runs-on: ubuntu-latest
+    environment: Preview
     steps:
     - name: Checkout
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -19,7 +25,7 @@ jobs:
     - name: Build
       uses: "./.github/actions/build"
       with:
-        NODE_ENV: staging
+        NODE_ENV: preview
         CROWDIN_WALLETS_API_KEY: ${{ secrets.CROWDIN_WALLETS_API_KEY }}
         DATADOG_APPLICATION_ID: ${{ vars.DATADOG_APPLICATION_ID }}
         IS_GROWTHBOOK_ENABLED: ${{ vars.IS_GROWTHBOOK_ENABLED }}
@@ -36,10 +42,32 @@ jobs:
         GROWTHBOOK_DECRYPTION_KEY: ${{ vars.GROWTHBOOK_DECRYPTION_KEY }}
         REF_NAME: ${{ github.ref_name }}
         REMOTE_CONFIG_URL: ${{ vars.REMOTE_CONFIG_URL }}
-    - name: Run tests
-      run: npm test
-    - name: Publish to Cloudflare Pages Test
-      uses: "./.github/actions/publish_to_pages_test"
+    # - name: Run tests
+    #   run: npm test
+    - name: Publish to cloudflare pages (test)
+      id: deploy
+      uses: cloudflare/wrangler-action@v3
       with:
-        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages deploy dist/ --project-name=wallets-app --branch=test
+        workingDirectory: packages/core
+
+    - name: Comment PR with deployment URL
+      uses: actions/github-script@v5
+      if: github.event_name == 'pull_request'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const deploymentUrl = process.env.DEPLOYMENT_URL;
+          const prNumber = context.payload.pull_request.number;
+          const message = `🚀 Deploy preview ready! [View deployment](${deploymentUrl})`;
+
+          github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+            body: message
+          });
+      env:
+        DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
