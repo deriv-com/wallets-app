@@ -61,7 +61,7 @@ jobs:
         script: |
           const deploymentUrl = process.env.DEPLOYMENT_URL;
           const prNumber = context.payload.pull_request.number;
-          const message = `🚀 Deploy preview ready! [View deployment](${deploymentUrl})`;
+          const message = `🚀 Deploy preview ready! [${deploymentUrl}](${deploymentUrl})`;
 
           github.rest.issues.createComment({
             owner: context.repo.owner,
