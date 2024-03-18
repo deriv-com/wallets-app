@@ -32,40 +32,8 @@ const copyConfig = base => {
             to: 'account/css',
         },
         {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/js/'),
-            to: 'cashier/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/css/'),
-            to: 'cashier/css',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p/dist/p2p/js/'),
-            to: 'p2p/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p/dist/p2p/css/'),
-            to: 'p2p/css',
-            noErrorOnMissing: true,
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/public'),
-            to: 'cashier/public',
-            transformPath(context) {
-                return context.split('node_modules/@deriv/cashier/dist/')[1];
-            },
-        },
-        {
             from: path.resolve(__dirname, '../node_modules/@deriv/wallets/dist/wallets'),
             to: 'wallets',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p-v2/dist/p2p-v2'),
-            to: 'p2p-v2',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier-v2/dist/cashier-v2'),
-            to: 'cashier-v2',
         },
         { from: path.resolve(__dirname, '../scripts/CNAME'), to: 'CNAME', toType: 'file', noErrorOnMissing: true },
         {

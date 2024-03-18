@@ -12,7 +12,6 @@ import {
 import { useHasMFAccountDeposited } from '@deriv/hooks';
 import { observer, useStore } from '@deriv/stores';
 import { Localize } from '@deriv/translations';
-import DepositFiatIframe from '@deriv/cashier/src/modules/deposit-fiat/components/deposit-fiat-iframe/deposit-fiat-iframe';
 import useLiveChat from 'App/Components/Elements/LiveChat/use-livechat';
 
 const OneTimeDepositModal = observer(() => {
@@ -77,7 +76,6 @@ const OneTimeDepositModal = observer(() => {
                     </Text>
                 </Button>
             </div>
-            <DepositFiatIframe />
         </div>
     );
 

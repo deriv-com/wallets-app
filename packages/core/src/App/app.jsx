@@ -6,7 +6,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Analytics } from '@deriv-com/analytics';
 import { BreakpointProvider } from '@deriv/quill-design';
 import { APIProvider } from '@deriv/api';
-import { CashierStore } from '@deriv/cashier';
 import { POIProvider, initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
 import { StoreProvider, ExchangeRatesProvider } from '@deriv/stores';
 import { getLanguage, initializeTranslations } from '@deriv/translations';
@@ -20,13 +19,8 @@ const AppWithoutTranslation = ({ root_store }) => {
     const base = l.pathname.split('/')[1];
     const has_base = /^\/(br_)/.test(l.pathname);
     const [is_translation_loaded] = useOnLoadTranslation();
-    const initCashierStore = () => {
-        root_store.modules.attachModule('cashier', new CashierStore(root_store, WS));
-        root_store.modules.cashier.general_store.init();
-    };
 
     React.useEffect(() => {
-        initCashierStore();
         const loadSmartchartsStyles = () => {
             import('@deriv/deriv-charts/dist/smartcharts.css');
         };
