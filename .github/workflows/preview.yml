@@ -50,7 +50,7 @@ jobs:
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        command: pages deploy dist/ --project-name=wallets-app --branch=test
+        command: pages deploy dist/ --project-name=deriv-wallets --branch=test
         workingDirectory: packages/core
 
     - name: Comment PR with deployment URL
