@@ -8,18 +8,6 @@ const gitRevisionPlugin = new GitRevisionPlugin();
 const copyConfig = base => {
     const patterns = [
         {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/css/'),
-            to: 'bot/css/',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/media/'),
-            to: 'media',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/js/'),
-            to: 'bot/js/',
-        },
-        {
             from: path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts/dist'),
             to: 'js/smartcharts/',
         },
@@ -72,22 +60,6 @@ const copyConfig = base => {
             to: 'trader',
         },
         {
-            from: path.resolve(__dirname, '../node_modules/@deriv/reports/dist/reports/js/'),
-            to: 'reports/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/reports/dist/reports/css/'),
-            to: 'reports/css',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cfd/dist/cfd'),
-            to: 'cfd',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/appstore/dist/appstore'),
-            to: 'appstore',
-        },
-        {
             from: path.resolve(__dirname, '../node_modules/@deriv/wallets/dist/wallets'),
             to: 'wallets',
         },
@@ -98,10 +70,6 @@ const copyConfig = base => {
         {
             from: path.resolve(__dirname, '../node_modules/@deriv/tradershub/dist/tradershub'),
             to: 'tradershub',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/account-v2/dist/account-v2'),
-            to: 'account-v2',
         },
         {
             from: path.resolve(__dirname, '../node_modules/@deriv/cashier-v2/dist/cashier-v2'),

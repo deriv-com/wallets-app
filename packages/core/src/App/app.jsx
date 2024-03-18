@@ -7,18 +7,9 @@ import { Analytics } from '@deriv-com/analytics';
 import { BreakpointProvider } from '@deriv/quill-design';
 import { APIProvider } from '@deriv/api';
 import { CashierStore } from '@deriv/cashier';
-import { CFDStore } from '@deriv/cfd';
-import {
-    POIProvider,
-    initFormErrorMessages,
-    setSharedCFDText,
-    setUrlLanguage,
-    setWebsocket,
-    useOnLoadTranslation,
-} from '@deriv/shared';
+import { POIProvider, initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
 import { StoreProvider, ExchangeRatesProvider } from '@deriv/stores';
 import { getLanguage, initializeTranslations } from '@deriv/translations';
-import { CFD_TEXT } from '../Constants/cfd-text';
 import { FORM_ERROR_MESSAGES } from '../Constants/form-error-messages';
 import AppContent from './AppContent';
 import initHotjar from '../Utils/Hotjar';
@@ -33,13 +24,9 @@ const AppWithoutTranslation = ({ root_store }) => {
         root_store.modules.attachModule('cashier', new CashierStore(root_store, WS));
         root_store.modules.cashier.general_store.init();
     };
-    const initCFDStore = () => {
-        root_store.modules.attachModule('cfd', new CFDStore({ root_store, WS }));
-    };
 
     React.useEffect(() => {
         initCashierStore();
-        initCFDStore();
         const loadSmartchartsStyles = () => {
             import('@deriv/deriv-charts/dist/smartcharts.css');
         };
@@ -59,7 +46,6 @@ const AppWithoutTranslation = ({ root_store }) => {
         // TODO: [translation-to-shared]: add translation implemnentation in shared
         setUrlLanguage(getLanguage());
         initFormErrorMessages(FORM_ERROR_MESSAGES);
-        setSharedCFDText(CFD_TEXT);
         root_store.common.setPlatform();
         loadSmartchartsStyles();
 

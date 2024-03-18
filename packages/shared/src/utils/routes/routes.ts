@@ -6,7 +6,6 @@ export const routes = {
     trading_assessment: '/account/trading-assessment',
     languages: '/account/languages',
     financial_assessment: '/account/financial-assessment',
-    personal_details: '/account/personal-details',
     proof_of_identity: '/account/proof-of-identity',
     proof_of_address: '/account/proof-of-address',
     proof_of_ownership: '/account/proof-of-ownership',
@@ -85,9 +84,6 @@ export const routes = {
     // Traders Hub
     traders_hub_v2: '/traders-hub',
     compare_accounts: '/traders-hub/compare-accounts',
-
-    // Account V2
-    account_v2: '/account-v2',
 
     // Cashier V2
     cashier_v2: '/cashier-v2',

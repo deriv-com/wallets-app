@@ -5,29 +5,14 @@ import { Loading } from '@deriv/components';
 import { localize } from '@deriv/translations';
 import Redirect from 'App/Containers/Redirect';
 import Endpoint from 'Modules/Endpoint';
-import CFDCompareAccounts from '@deriv/cfd/src/Containers/cfd-compare-accounts';
 
 // Error Routes
 const Page404 = React.lazy(() => import(/* webpackChunkName: "404" */ 'Modules/Page404'));
-
-const CFD = React.lazy(() =>
-    moduleLoader(() => {
-        // eslint-disable-next-line import/no-unresolved
-        return import(/* webpackChunkName: "cfd" */ '@deriv/cfd');
-    })
-);
 
 const Cashier = React.lazy(() =>
     moduleLoader(() => {
         // eslint-disable-next-line import/no-unresolved
         return import(/* webpackChunkName: "cashier" */ '@deriv/cashier');
-    })
-);
-
-const AppStore = React.lazy(() =>
-    moduleLoader(() => {
-        // eslint-disable-next-line import/no-unresolved
-        return import(/* webpackChunkName: "appstore" */ '@deriv/appstore');
     })
 );
 
@@ -38,79 +23,13 @@ const Wallets = React.lazy(() =>
     })
 );
 
-const TradersHub = React.lazy(() =>
-    moduleLoader(() => {
-        // eslint-disable-next-line import/no-unresolved
-        return import(/* webpackChunkName: "tradershub" */ '@deriv/tradershub');
-    })
-);
-
-const Cashier_V2 = React.lazy(() =>
-    moduleLoader(() => {
-        // eslint-disable-next-line import/no-unresolved
-        return import(/* webpackChunkName: "cashier-v2" */ '@deriv/cashier-v2');
-    })
-);
-
 const getModules = () => {
     const modules = [
-        {
-            path: routes.dxtrade,
-            component: props => <CFD {...props} platform='dxtrade' />,
-            getTitle: () => localize('Deriv X'),
-        },
-        {
-            path: routes.compare_cfds,
-            component: CFDCompareAccounts,
-            getTitle: () => localize('Compare CFD accounts'),
-        },
-        {
-            path: routes.mt5,
-            component: props => <CFD {...props} platform='mt5' />,
-            getTitle: () => localize('MT5'),
-        },
-        {
-            path: routes.traders_hub,
-            component: AppStore,
-            is_authenticated: true,
-            getTitle: () => localize("Trader's Hub"),
-        },
         {
             path: routes.wallets,
             component: Wallets,
             is_authenticated: true,
             getTitle: () => localize('Wallets'),
-        },
-        {
-            path: routes.traders_hub_v2,
-            component: TradersHub,
-            is_authenticated: true,
-            getTitle: () => localize('Trader’s Hub V2'),
-        },
-        {
-            path: routes.cashier_v2,
-            component: Cashier_V2,
-            is_authenticated: true,
-            getTitle: () => localize('Cashier'),
-        },
-        {
-            path: routes.onboarding,
-            component: AppStore,
-            is_authenticated: false,
-            getTitle: () => localize('Appstore'),
-            routes: [
-                {
-                    path: routes.traders_hub,
-                    component: AppStore,
-                    getTitle: () => localize("Trader's Hub"),
-                },
-                {
-                    path: routes.onboarding,
-                    component: AppStore,
-                    is_authenticated: false,
-                    getTitle: () => localize('Onboarding'),
-                },
-            ],
         },
         {
             path: routes.cashier,
