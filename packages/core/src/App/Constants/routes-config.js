@@ -23,6 +23,7 @@ const getModules = () => {
             is_authenticated: true,
             getTitle: () => localize('Wallets'),
         },
+        { path: routes.root, component: RouterRedirect, getTitle: () => '', to: '/wallets' },
     ];
 
     return modules;
