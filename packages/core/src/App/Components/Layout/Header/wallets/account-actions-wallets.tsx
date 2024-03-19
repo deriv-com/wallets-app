@@ -7,7 +7,6 @@ import { LoginButton } from '../login-button.jsx';
 import { SignupButton } from '../signup-button.jsx';
 import { BinaryLink } from '../../../Routes/index.js';
 import ToggleNotifications from '../toggle-notifications.jsx';
-import AccountInfoWallets from './account-info-wallets';
 import 'Sass/app/_common/components/account-switcher.scss';
 
 const AccountActionsWallets = observer(() => {
@@ -34,7 +33,6 @@ const AccountActionsWallets = observer(() => {
     if (is_mobile) {
         return (
             <React.Fragment>
-                <AccountInfoWallets is_dialog_on={is_accounts_switcher_on} toggleDialog={toggleAccountsDialog} />
                 <div className='acc-info__wallets-notification-icon'>
                     <ToggleNotifications
                         count={notifications_count}
@@ -67,7 +65,6 @@ const AccountActionsWallets = observer(() => {
                     <Icon icon='IcUserOutline' />
                 </BinaryLink>
             </Popover>
-            <AccountInfoWallets is_dialog_on={is_accounts_switcher_on} toggleDialog={toggleAccountsDialog} />
             {!is_virtual && !currency && (
                 <div className='set-currency'>
                     <Button

@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import { observer, useStore } from '@deriv/stores';
-import { Icon, Modal, Popover, Text } from '@deriv/components';
+import { Icon, Popover, Text } from '@deriv/components';
 import { Localize, localize } from '@deriv/translations';
 import 'Sass/app/modules/settings.scss';
-import LanguageSettings from '../../../Containers/SettingsModal/settings-language';
 
 const ToggleLanguageSettings = observer(() => {
     const { common, ui } = useStore();
@@ -35,16 +34,6 @@ const ToggleLanguageSettings = observer(() => {
                     </Text>
                 </Popover>
             </a>
-            <Modal
-                id='dt_settings_modal'
-                is_open={is_language_settings_modal_on}
-                title={localize('Select Language')}
-                toggleModal={toggleLanguageSettingsModal}
-                width='616px'
-                should_header_stick_body={false}
-            >
-                <LanguageSettings />
-            </Modal>
         </React.Fragment>
     );
 });

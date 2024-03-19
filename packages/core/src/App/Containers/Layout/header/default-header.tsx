@@ -5,8 +5,6 @@ import { observer, useStore } from '@deriv/stores';
 import { MenuLinks, PlatformSwitcher } from 'App/Components/Layout/Header';
 import { AccountsInfoLoader } from 'App/Components/Layout/Header/Components/Preloader';
 import NewVersionNotification from 'App/Containers/new-version-notification.jsx';
-import RealAccountSignup from 'App/Containers/RealAccountSignup';
-import SetAccountCurrencyModal from 'App/Containers/SetAccountCurrencyModal';
 import ToggleMenuDrawer from 'App/Components/Layout/Header/toggle-menu-drawer.jsx';
 import platform_config from 'App/Constants/platform-config';
 import { useHistory } from 'react-router-dom';
@@ -122,8 +120,6 @@ const DefaultHeader = observer(() => {
                 Prevent the modals that are part of Real Account signup to get triggered when the corresponding store value changes by
                 removing the parent element from DOM
             */}
-            {!is_trading_assessment_for_existing_user_enabled && is_real_acc_signup_on && <RealAccountSignup />}
-            <SetAccountCurrencyModal />
             <NewVersionNotification onUpdate={addUpdateNotification} />
         </header>
     );

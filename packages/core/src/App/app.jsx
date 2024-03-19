@@ -5,9 +5,8 @@ import { withTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Analytics } from '@deriv-com/analytics';
 import { BreakpointProvider } from '@deriv/quill-design';
-import { APIProvider } from '@deriv/api';
-import { POIProvider, initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
-import { StoreProvider, ExchangeRatesProvider } from '@deriv/stores';
+import { initFormErrorMessages, setUrlLanguage, setWebsocket, useOnLoadTranslation } from '@deriv/shared';
+import { StoreProvider } from '@deriv/stores';
 import { getLanguage, initializeTranslations } from '@deriv/translations';
 import { FORM_ERROR_MESSAGES } from '../Constants/form-error-messages';
 import AppContent from './AppContent';
@@ -21,10 +20,6 @@ const AppWithoutTranslation = ({ root_store }) => {
     const [is_translation_loaded] = useOnLoadTranslation();
 
     React.useEffect(() => {
-        const loadSmartchartsStyles = () => {
-            import('@deriv/deriv-charts/dist/smartcharts.css');
-        };
-
         const loadExternalScripts = async () => {
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -41,7 +36,6 @@ const AppWithoutTranslation = ({ root_store }) => {
         setUrlLanguage(getLanguage());
         initFormErrorMessages(FORM_ERROR_MESSAGES);
         root_store.common.setPlatform();
-        loadSmartchartsStyles();
 
         // Set maximum timeout before we load livechat in case if page loading is disturbed or takes too long
         const max_timeout = setTimeout(loadExternalScripts, 15 * 1000); // 15 seconds
@@ -74,19 +68,11 @@ const AppWithoutTranslation = ({ root_store }) => {
         <>
             {is_translation_loaded ? (
                 <Router basename={has_base ? `/${base}` : null}>
-                    <StoreProvider store={root_store}>
-                        <BreakpointProvider>
-                            <APIProvider>
-                                <POIProvider>
-                                    <StoreProvider store={root_store}>
-                                        <ExchangeRatesProvider>
-                                            <AppContent passthrough={platform_passthrough} />
-                                        </ExchangeRatesProvider>
-                                    </StoreProvider>
-                                </POIProvider>
-                            </APIProvider>
-                        </BreakpointProvider>
-                    </StoreProvider>
+                    <BreakpointProvider>
+                        <StoreProvider store={root_store}>
+                            <AppContent passthrough={platform_passthrough} />
+                        </StoreProvider>
+                    </BreakpointProvider>
                 </Router>
             ) : (
                 <></>

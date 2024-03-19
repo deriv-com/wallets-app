@@ -13,10 +13,7 @@ import { BinaryLink } from 'App/Components/Routes';
 import DerivBrandLogo from 'Assets/SvgComponents/header/deriv-rebranding-logo.svg';
 import DerivBrandShortLogo from 'Assets/SvgComponents/header/deriv-logo-short.svg';
 import WalletsLogo from 'Assets/SvgComponents/header/wallets-logo.svg';
-import RealAccountSignup from 'App/Containers/RealAccountSignup';
 import AccountInfo from 'App/Components/Layout/Header/account-info';
-import SetAccountCurrencyModal from 'App/Containers/SetAccountCurrencyModal';
-import CurrencySelectionModal from '../../CurrencySelectionModal';
 import DefaultMobileLinks from './default-mobile-links';
 import ShowNotifications from './show-notifications';
 import TradersHubOnboarding from './traders-hub-onboarding';
@@ -152,7 +149,6 @@ const TradersHubHeaderWallets = observer(() => {
                         )}
                     </div>
                 </div>
-                <RealAccountSignup />
             </DesktopWrapper>
             <MobileWrapper>
                 <div className='traders-hub-header__mobile-parent'>
@@ -182,10 +178,7 @@ const TradersHubHeaderWallets = observer(() => {
                         )}
                     </div>
                 </div>
-                <RealAccountSignup />
             </MobileWrapper>
-            <SetAccountCurrencyModal />
-            <CurrencySelectionModal is_visible={modal_data.active_modal === 'currency_selection'} />
         </header>
     );
 });

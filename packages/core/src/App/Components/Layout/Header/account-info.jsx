@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
 import { DesktopWrapper, Icon, MobileWrapper, Text } from '@deriv/components';
 import { Localize } from '@deriv/translations';
 import { getCurrencyDisplayCode } from '@deriv/shared';
-import AccountSwitcher from 'App/Containers/AccountSwitcher';
-import AccountSwitcherMobile from 'App/Containers/AccountSwitcher/account-switcher-mobile';
 import AccountInfoWrapper from './account-info-wrapper';
 import AccountInfoIcon from './account-info-icon';
 import DisplayAccountType from './display-account-type';
@@ -17,8 +14,6 @@ const AccountInfo = ({
     balance,
     currency,
     country_standpoint,
-    disableApp,
-    enableApp,
     is_dialog_on,
     is_eu,
     is_virtual,
@@ -90,30 +85,6 @@ const AccountInfo = ({
                     )}
                 </div>
             </AccountInfoWrapper>
-            <MobileWrapper>
-                <AccountSwitcherMobile
-                    is_visible={is_dialog_on}
-                    disableApp={disableApp}
-                    enableApp={enableApp}
-                    toggle={toggleDialog}
-                />
-            </MobileWrapper>
-            <DesktopWrapper>
-                <CSSTransition
-                    in={is_dialog_on}
-                    timeout={200}
-                    classNames={{
-                        enter: 'acc-switcher__wrapper--enter',
-                        enterDone: 'acc-switcher__wrapper--enter-done',
-                        exit: 'acc-switcher__wrapper--exit',
-                    }}
-                    unmountOnExit
-                >
-                    <div className='acc-switcher__wrapper'>
-                        <AccountSwitcher is_visible={is_dialog_on} toggle={toggleDialog} />
-                    </div>
-                </CSSTransition>
-            </DesktopWrapper>
         </div>
     );
 };

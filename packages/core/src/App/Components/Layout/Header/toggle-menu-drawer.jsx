@@ -23,7 +23,7 @@ import { MobileLanguageMenu, MenuTitle } from './Components/ToggleMenu';
 import { useRemoteConfig } from '@deriv/api';
 
 const ToggleMenuDrawer = observer(({ platform_config }) => {
-    const { common, ui, client, traders_hub, modules } = useStore();
+    const { common, ui, client, traders_hub } = useStore();
     const { app_routing_history, current_language } = common;
     const {
         disableApp,
@@ -47,9 +47,6 @@ const ToggleMenuDrawer = observer(({ platform_config }) => {
         is_proof_of_ownership_enabled,
         is_eu,
     } = client;
-    const { cashier } = modules;
-    const { payment_agent } = cashier;
-    const { is_payment_agent_visible } = payment_agent;
     const { show_eu_related_content, setTogglePlatformType } = traders_hub;
     const is_account_transfer_visible = useAccountTransferVisible();
     const is_onramp_visible = useOnrampVisible();
@@ -168,7 +165,6 @@ const ToggleMenuDrawer = observer(({ platform_config }) => {
                     route_config.routes.map((route, index) => {
                         if (
                             !route.is_invisible &&
-                            (route.path !== routes.cashier_pa || is_payment_agent_visible) &&
                             (route.path !== routes.cashier_pa_transfer || is_payment_agent_transfer_visible) &&
                             (route.path !== routes.cashier_p2p || is_p2p_enabled) &&
                             (route.path !== routes.cashier_onramp || is_onramp_visible) &&
