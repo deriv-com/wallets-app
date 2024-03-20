@@ -28,7 +28,6 @@ import {
 } from '@deriv/shared';
 import { Localize, localize } from '@deriv/translations';
 
-import { BinaryLink } from 'App/Components/Routes';
 import { WS } from 'Services';
 
 import { sortNotifications, sortNotificationsMobile } from '../App/Components/Elements/NotificationMessage/constants';
@@ -42,6 +41,7 @@ import {
     poi_notifications,
 } from './Helpers/client-notifications';
 import BaseStore from './base-store';
+import { Link } from 'react-router-dom';
 
 export default class NotificationStore extends BaseStore {
     is_notifications_visible = false;
@@ -903,7 +903,7 @@ export default class NotificationStore extends BaseStore {
                 message: (
                     <Localize
                         i18n_default_text='<0>Your Proof of Identity or Proof of Address</0> did not meet our requirements. Please check your email for further instructions.'
-                        components={[<BinaryLink key={0} className='link' to={routes.proof_of_identity} />]}
+                        components={[<Link key={0} className='link' to={routes.proof_of_identity} />]}
                     />
                 ),
                 type: 'warning',

@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import React from 'react';
 import { Button, Text } from '@deriv/components';
 import { isEmptyObject } from '@deriv/shared';
-import { BinaryLink } from 'App/Components/Routes';
 import CloseButton from './close-button.jsx';
 import NotificationStatusIcons from './notification-status-icons.jsx';
+import { Link } from 'react-router-dom';
 
 const NotificationOrder = ({ action, header, message, onClose }) => {
     setTimeout(onClose, 60000);
@@ -32,7 +32,7 @@ const NotificationOrder = ({ action, header, message, onClose }) => {
                     {!isEmptyObject(action) && (
                         <React.Fragment>
                             {action.route ? (
-                                <BinaryLink
+                                <Link
                                     className={classNames('dc-btn', 'dc-btn--secondary', 'notification__cta-button')}
                                     onClick={onClose}
                                     to={action.route}
@@ -40,7 +40,7 @@ const NotificationOrder = ({ action, header, message, onClose }) => {
                                     <Text size='xxs' weight='bold'>
                                         {action.text}
                                     </Text>
-                                </BinaryLink>
+                                </Link>
                             ) : (
                                 <Button
                                     className='notification__cta-button'

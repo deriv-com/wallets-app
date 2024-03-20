@@ -93,8 +93,6 @@ PlatformSwitcher.propTypes = {
     current_language: PropTypes.string,
     app_routing_history: PropTypes.array,
     is_landing_company_loaded: PropTypes.bool,
-    is_logged_in: PropTypes.bool,
-    is_logging_in: PropTypes.bool,
     setTogglePlatformType: PropTypes.func,
 };
 

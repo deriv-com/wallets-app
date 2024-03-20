@@ -12,10 +12,6 @@ declare global {
             open_chat_window: VoidFunction;
         };
         TrackJS: { console: { log: (arg0: unknown[]) => void }; track: (arg0: object) => void };
-        Blockly;
-        Onfido: {
-            init: (args: any) => any;
-        };
         DD_RUM: object | undefined;
     }
 }

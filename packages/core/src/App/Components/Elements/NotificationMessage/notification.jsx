@@ -8,8 +8,8 @@ import NotificationStatusIcons from './notification-status-icons.jsx';
 import NotificationBanner from './notification-banner.jsx';
 import { default_delay, types } from './constants';
 import NotificationPromo from './notification-promo.jsx';
-import { BinaryLink } from '../../Routes';
 import NotificationOrder from './notification-order.jsx';
+import { Link } from 'react-router-dom';
 
 const Notification = ({ data, removeNotificationMessage }) => {
     const linear_progress_container_ref = React.useRef(null);
@@ -119,7 +119,7 @@ const Notification = ({ data, removeNotificationMessage }) => {
                             {!isEmptyObject(data.action) && (
                                 <React.Fragment>
                                     {data.action.route ? (
-                                        <BinaryLink
+                                        <Link
                                             className={classNames(
                                                 'dc-btn',
                                                 'dc-btn--secondary',
@@ -131,7 +131,7 @@ const Notification = ({ data, removeNotificationMessage }) => {
                                             <Text size='xxs' weight='bold'>
                                                 {data.action.text}
                                             </Text>
-                                        </BinaryLink>
+                                        </Link>
                                     ) : (
                                         <Button
                                             className='notification__cta-button'

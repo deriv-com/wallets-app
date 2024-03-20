@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Div100vhContainer, Icon, useOnClickOutside, Text } from '@deriv/components';
 import { routes, isDesktop, isMobile, getActivePlatform } from '@deriv/shared';
-import { BinaryLink } from 'App/Components/Routes';
 import 'Sass/app/_common/components/platform-dropdown.scss';
 import { Localize } from '@deriv/translations';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const PlatformBox = ({ platform: { icon, description } }) => (
     <React.Fragment>
@@ -21,7 +21,7 @@ const PlatformBox = ({ platform: { icon, description } }) => (
 const PlatformDropdownContent = ({ platform, app_routing_history }) => {
     return (
         (platform.link_to && (
-            <BinaryLink
+            <Link
                 data-testid='dt_platform_dropdown'
                 to={platform.link_to}
                 // This is here because in routes-config it needs to have children, but not in menu
@@ -30,7 +30,7 @@ const PlatformDropdownContent = ({ platform, app_routing_history }) => {
                 isActive={() => getActivePlatform(app_routing_history) === platform.name}
             >
                 <PlatformBox platform={platform} />
-            </BinaryLink>
+            </Link>
         )) || (
             <a
                 data-testid='dt_platform_dropdown_link'
@@ -49,7 +49,7 @@ const PlatformDropdown = ({ app_routing_history, closeDrawer, platform_config, s
     const TradersHubRedirect = () => {
         return (
             <div className='platform-dropdown__cta'>
-                <BinaryLink
+                <Link
                     onClick={() => {
                         if (isMobile()) {
                             history.push(routes.traders_hub);
@@ -61,7 +61,7 @@ const PlatformDropdown = ({ app_routing_history, closeDrawer, platform_config, s
                     <Text size='xs' weight='bold' align='center' className='platform-dropdown__cta--link'>
                         <Localize i18n_default_text="Looking for CFDs? Go to Trader's Hub" />
                     </Text>
-                </BinaryLink>
+                </Link>
             </div>
         );
     };

@@ -1,32 +1,24 @@
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Popover } from '@deriv/components';
 import { localize } from '@deriv/translations';
-import { observer, useStore } from '@deriv/stores';
+import { isMobileOs } from '@deriv/shared';
 
-const NetworkStatus = observer(({ is_mobile }) => {
-    const { common } = useStore();
-    const { network_status: status } = common;
-
+const NetworkStatus = () => {
     const network_status_element = (
         <div
             data-testid='dt_network_status_element'
-            className={classNames('network-status__circle', {
-                'network-status__circle--offline': status.class === 'offline',
-                'network-status__circle--online': status.class === 'online',
-                'network-status__circle--blinker': status.class === 'blinker',
-            })}
+            className={classNames('network-status__circle', 'network-status__circle--online')}
         />
     );
     return (
         <div
             data-testid='dt_network_status'
             className={classNames('network-status__wrapper', {
-                'network-status__wrapper--is-mobile': is_mobile,
+                'network-status__wrapper--is-mobile': isMobileOs(),
             })}
         >
-            {is_mobile ? (
+            {isMobileOs() ? (
                 network_status_element
             ) : (
                 <Popover
@@ -41,10 +33,6 @@ const NetworkStatus = observer(({ is_mobile }) => {
             )}
         </div>
     );
-});
-
-NetworkStatus.propTypes = {
-    is_mobile: PropTypes.bool,
 };
 
 export default NetworkStatus;

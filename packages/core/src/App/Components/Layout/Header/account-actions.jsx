@@ -6,8 +6,8 @@ import { Localize } from '@deriv/translations';
 import { LoginButton } from './login-button.jsx';
 import { SignupButton } from './signup-button.jsx';
 import ToggleNotifications from './toggle-notifications.jsx';
-import { BinaryLink } from '../../Routes';
 import 'Sass/app/_common/components/account-switcher.scss';
+import { Link } from 'react-router-dom';
 
 const AccountActions = React.memo(
     ({ is_logged_in, is_notifications_visible, notifications_count, toggleNotifications }) => {
@@ -38,9 +38,9 @@ const AccountActions = React.memo(
                             should_disable_pointer_events
                             zIndex={9999}
                         >
-                            <BinaryLink className='account-settings-toggle' to={routes.personal_details}>
+                            <Link className='account-settings-toggle' to={routes.personal_details}>
                                 <Icon icon='IcUserOutline' />
-                            </BinaryLink>
+                            </Link>
                         </Popover>
                     </DesktopWrapper>
                 </React.Fragment>

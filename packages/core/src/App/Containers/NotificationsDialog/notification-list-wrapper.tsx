@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import React, { LegacyRef } from 'react';
 import { Text, ThemedScrollbars } from '@deriv/components';
-import { routes } from '@deriv/shared';
-import { observer, useStore } from '@deriv/stores';
+import { isMobileOs, routes } from '@deriv/shared';
 import { Localize } from '@deriv/translations';
 import EmptyNotification from 'App/Components/Elements/Notifications/empty-notification';
 import NotificationsClearAllFooter from './notifications-clear-all-footer';
@@ -10,14 +9,12 @@ import NotificationsList from './notifications-list';
 
 type TNotificationListWrapper = { clearNotifications: () => void };
 
-const NotificationListWrapperForwardRef = React.forwardRef(
+const NotificationListWrapper = React.forwardRef(
     ({ clearNotifications }: TNotificationListWrapper, ref: LegacyRef<HTMLDivElement> | undefined) => {
-        const { notifications, ui } = useStore();
-        const { is_notifications_empty } = notifications;
-        const { is_mobile } = ui;
-
         const traders_hub = window.location.pathname === routes.traders_hub;
         const wallets_path = window.location.pathname === routes.wallets;
+        const notifications = [];
+        const is_notifications_empty = notifications.length === 0;
 
         return (
             <div
@@ -46,7 +43,7 @@ const NotificationListWrapperForwardRef = React.forwardRef(
                         'notifications-dialog__content--empty': is_notifications_empty,
                     })}
                 >
-                    <ThemedScrollbars is_bypassed={is_mobile || is_notifications_empty}>
+                    <ThemedScrollbars is_bypassed={isMobileOs() || is_notifications_empty}>
                         {is_notifications_empty ? <EmptyNotification /> : <NotificationsList />}
                     </ThemedScrollbars>
                 </div>
@@ -55,8 +52,6 @@ const NotificationListWrapperForwardRef = React.forwardRef(
         );
     }
 );
-NotificationListWrapperForwardRef.displayName = 'NotificationListWrapper';
-
-const NotificationListWrapper = observer(NotificationListWrapperForwardRef);
+NotificationListWrapper.displayName = 'NotificationListWrapper';
 
 export default NotificationListWrapper;

@@ -10,7 +10,7 @@ import {
     useFeatureFlags,
 } from '@deriv/hooks';
 import { routes, PlatformContext, getStaticUrl, whatsapp_url } from '@deriv/shared';
-import { observer, useStore } from '@deriv/stores';
+import { useStore } from '@deriv/stores';
 import { localize } from '@deriv/translations';
 import NetworkStatus from 'App/Components/Layout/Footer';
 import ServerTime from 'App/Containers/server-time.jsx';
@@ -22,7 +22,7 @@ import MenuLink from './menu-link';
 import { MobileLanguageMenu, MenuTitle } from './Components/ToggleMenu';
 import { useRemoteConfig } from '@deriv/api';
 
-const ToggleMenuDrawer = observer(({ platform_config }) => {
+const ToggleMenuDrawer = ({ platform_config }) => {
     const { common, ui, client, traders_hub } = useStore();
     const { app_routing_history, current_language } = common;
     const {
@@ -421,7 +421,7 @@ const ToggleMenuDrawer = observer(({ platform_config }) => {
             </MobileDrawer>
         </React.Fragment>
     );
-});
+};
 
 ToggleMenuDrawer.displayName = 'ToggleMenuDrawer';
 
