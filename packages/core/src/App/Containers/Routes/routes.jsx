@@ -1,21 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { withRouter } from 'react-router';
-import Loadable from 'react-loadable';
-import { UILoader } from '@deriv/components';
 import { urlForLanguage } from '@deriv/shared';
 import { getLanguage } from '@deriv/translations';
 import BinaryRoutes from 'App/Components/Routes';
 import { observer, useStore } from '@deriv/stores';
-
-const Error = Loadable({
-    loader: () => import(/* webpackChunkName: "error-component" */ 'App/Components/Elements/Errors'),
-    loading: UILoader,
-    render(loaded, props) {
-        const Component = loaded.default;
-        return <Component {...props} />;
-    },
-});
 
 const Routes = observer(({ history, location, passthrough }) => {
     const { client, common } = useStore();
@@ -52,7 +41,7 @@ const Routes = observer(({ history, location, passthrough }) => {
     const has_lang = lang_regex.test(location.search);
 
     if (has_error) {
-        return <Error {...error} />;
+        throw new Error(JSON.stringify(error));
     }
 
     // we need to replace state of history object on every route

@@ -8,104 +8,8 @@ const gitRevisionPlugin = new GitRevisionPlugin();
 const copyConfig = base => {
     const patterns = [
         {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/css/'),
-            to: 'bot/css/',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/media/'),
-            to: 'media',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/bot-web-ui/dist/bot/js/'),
-            to: 'bot/js/',
-        },
-        {
-            from: path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts/dist'),
-            to: 'js/smartcharts/',
-        },
-        {
-            from: path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts/dist/chart/assets'),
-            to: 'assets',
-        },
-        {
-            from: path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts/dist/chart/assets'),
-            to: 'contract/assets',
-        },
-        {
-            from: path.resolve(__dirname, '../../../node_modules/@deriv/deriv-charts/dist/chart/assets'),
-            to: 'bot/assets',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/account/dist/account/js/'),
-            to: 'account/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/account/dist/account/css/'),
-            to: 'account/css',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/js/'),
-            to: 'cashier/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/css/'),
-            to: 'cashier/css',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p/dist/p2p/js/'),
-            to: 'p2p/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p/dist/p2p/css/'),
-            to: 'p2p/css',
-            noErrorOnMissing: true,
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier/dist/cashier/public'),
-            to: 'cashier/public',
-            transformPath(context) {
-                return context.split('node_modules/@deriv/cashier/dist/')[1];
-            },
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/trader/dist/trader'),
-            to: 'trader',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/reports/dist/reports/js/'),
-            to: 'reports/js',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/reports/dist/reports/css/'),
-            to: 'reports/css',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cfd/dist/cfd'),
-            to: 'cfd',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/appstore/dist/appstore'),
-            to: 'appstore',
-        },
-        {
             from: path.resolve(__dirname, '../node_modules/@deriv/wallets/dist/wallets'),
             to: 'wallets',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/p2p-v2/dist/p2p-v2'),
-            to: 'p2p-v2',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/tradershub/dist/tradershub'),
-            to: 'tradershub',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/account-v2/dist/account-v2'),
-            to: 'account-v2',
-        },
-        {
-            from: path.resolve(__dirname, '../node_modules/@deriv/cashier-v2/dist/cashier-v2'),
-            to: 'cashier-v2',
         },
         { from: path.resolve(__dirname, '../scripts/CNAME'), to: 'CNAME', toType: 'file', noErrorOnMissing: true },
         {
@@ -129,13 +33,7 @@ const copyConfig = base => {
             toType: 'file',
         },
         { from: path.resolve(__dirname, '../src/root_files/custom404.html'), to: 'custom404.html', toType: 'file' },
-        {
-            from: path.resolve(__dirname, '../src/root_files/localstorage-sync.html'),
-            to: 'localstorage-sync.html',
-            toType: 'file',
-        },
         { from: path.resolve(__dirname, '../src/root_files/robots.txt'), to: 'robots.txt', toType: 'file' },
-        { from: path.resolve(__dirname, '../src/root_files/sitemap.xml'), to: 'sitemap.xml', toType: 'file' },
         {
             from: path.resolve(__dirname, '../src/public/images/favicons/favicon.ico'),
             to: 'favicon.ico',

@@ -4,7 +4,7 @@ import { Button, Icon } from '@deriv/components';
 import { routes } from '@deriv/shared';
 import { Localize } from '@deriv/translations';
 
-import { BinaryLink } from 'App/Components/Routes';
+import { Link } from 'react-router-dom';
 
 import ShowNotifications from './show-notifications';
 import TradersHubOnboarding from './traders-hub-onboarding';
@@ -24,9 +24,9 @@ const DefaultMobileLinks = React.memo(({ handleClickCashier }: TDefaultMobileLin
             <div className='traders-hub-header__menu-right--items--notifications'>
                 <ShowNotifications />
             </div>
-            <BinaryLink className='traders-hub-header__setting' to={routes.personal_details}>
+            <a className='traders-hub-header__setting' href={routes.personal_details}>
                 <Icon icon='IcUserOutline' size={20} />
-            </BinaryLink>
+            </a>
             {!is_next_wallet_enabled && (
                 <div className='traders-hub-header__cashier-button'>
                     <Button primary small onClick={handleClickCashier}>

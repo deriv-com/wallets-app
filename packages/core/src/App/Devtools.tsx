@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Input } from '@deriv/components';
 import { getAppId, getDebugServiceWorker, getSocketURL } from '@deriv/shared';
-import { observer, useStore } from '@deriv/stores';
 import { useFormik } from 'formik';
 import './Devtools.scss';
 
-const EndpointSection = observer(() => {
+const EndpointSection = () => {
     const formik = useFormik({
         initialValues: {
             app_id: getAppId(),
@@ -91,35 +90,13 @@ const EndpointSection = observer(() => {
             </div>
         </div>
     );
-});
+};
 
-const FeatureFlagsSection = observer(() => {
-    const { feature_flags } = useStore();
+const FeatureFlagsSection = () => {
+    return null;
+};
 
-    if (!feature_flags.data) return null;
-
-    return (
-        <div className='devtools__checkbox-container'>
-            {Object.keys(feature_flags.data).map(flag => {
-                const flag_name = flag as keyof typeof feature_flags.data;
-
-                return (
-                    <Checkbox
-                        key={flag_name}
-                        className='devtools__checkbox'
-                        classNameLabel={'devtools__checkbox-label'}
-                        label={flag_name}
-                        value={feature_flags.data?.[flag_name]}
-                        // @ts-expect-error Checkbox onChange type is not correct and need to be fixed.
-                        onChange={e => feature_flags.update(old => ({ ...old, [flag_name]: e.target.checked }))}
-                    />
-                );
-            })}
-        </div>
-    );
-});
-
-const Devtools = observer(() => {
+const Devtools = () => {
     const [is_devtool_open, setIsDevtoolOpen] = useState(false);
 
     return (
@@ -142,7 +119,7 @@ const Devtools = observer(() => {
             </button>
         </div>
     );
-});
+};
 
 // @ts-expect-error Here we check if the code is running on the production environment,
 // we will return a null component instead of the actual devtools component. Hence the TS error is expected.

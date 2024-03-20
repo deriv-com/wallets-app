@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoreProvider, mockStore } from '@deriv/stores';
 import { render, screen } from '@testing-library/react';
-import TradersHubHomeButton from '../traders-hub-home-button';
+import TradersHubHomeButton from '../xtraders-hub-home-button';
 
 jest.mock('react-router', () => ({
     ...jest.requireActual('react-router'),

@@ -9,8 +9,6 @@ import NetworkStatus, {
     RegulatoryInformation,
     ResponsibleTrading,
     ToggleFullScreen,
-    ToggleSettings,
-    ToggleLanguageSettings,
 } from 'App/Components/Layout/Footer';
 import LiveChat from 'App/Components/Elements/LiveChat';
 import WhatsApp from 'App/Components/Elements/WhatsApp/index.ts';
@@ -32,21 +30,9 @@ const FooterExtensionRenderer = (footer_extension, idx) => {
 };
 
 const Footer = observer(() => {
-    const { client, common, ui, traders_hub } = useStore();
+    const { client, ui, traders_hub } = useStore();
     const { is_logged_in, landing_company_shortcode, is_eu, is_virtual } = client;
-    const { current_language } = common;
-    const {
-        enableApp,
-        footer_extensions,
-        settings_extension,
-        is_app_disabled,
-        is_route_modal_on,
-        is_settings_modal_on,
-        is_language_settings_modal_on,
-        disableApp,
-        toggleSettingsModal,
-        toggleLanguageSettingsModal,
-    } = ui;
+    const { footer_extensions, is_app_disabled, is_route_modal_on } = ui;
     const { data } = useRemoteConfig();
     const { cs_chat_livechat, cs_chat_whatsapp } = data;
     const { show_eu_related_content } = traders_hub;
@@ -88,18 +74,6 @@ const Footer = observer(() => {
                 )}
                 <FooterIconSeparator />
                 <HelpCentre />
-                <ToggleSettings
-                    is_settings_visible={is_settings_modal_on}
-                    toggleSettings={toggleSettingsModal}
-                    disableApp={disableApp}
-                    enableApp={enableApp}
-                    settings_extension={settings_extension}
-                />
-                <ToggleLanguageSettings
-                    is_settings_visible={is_language_settings_modal_on}
-                    toggleSettings={toggleLanguageSettingsModal}
-                    lang={current_language}
-                />
                 <ToggleFullScreen />
             </div>
         </footer>
