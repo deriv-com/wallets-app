@@ -26,7 +26,6 @@ html {
     min-height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
 }
 
 /* postcss-bem-linter: ignore */
@@ -179,5 +178,4 @@ html,
 /** @define deriv-app */
 .deriv-app {
     height: 100%;
-    overflow: hidden;
 }
